@@ -37,46 +37,38 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.width
 Type: `String`
-Default value: `',  '`
+Default value: `'960px'`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+The viewport width for media queries to be evaluated against (for now use exclusively `em` or exclusively `px`).
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the styles from `styles.css` then `other-styles.css` are evaluated and any media queries which would apply in a `960px` width browser are written into `desktop-syles.css`.
 
 ```js
 grunt.initConfig({
   extract_media: {
-    options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'desktop-styles.css': ['styles.css', 'other-styles.css'],
     },
   },
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, the styles from `styles.css` then `other-styles.css` are evaluated and any media queries which would apply in a `320px` width browser are written into `mobile-syles.css`.
 
 ```js
 grunt.initConfig({
   extract_media: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      width: '320px'
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'mobile-styles.css': ['styles.css', 'other-styles.css'],
     },
   },
 });
