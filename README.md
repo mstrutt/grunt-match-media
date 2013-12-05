@@ -1,4 +1,4 @@
-# grunt-extract-media
+# grunt-match-media
 
 > Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them
 
@@ -8,23 +8,23 @@ This plugin requires Grunt `~0.4.2`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-extract-media --save-dev
+npm install grunt-match-media --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-extract-media');
+grunt.loadNpmTasks('grunt-match-media');
 ```
 
-## The "extract_media" task
+## The "match_media" task
 
 ### Overview
-In your project's Gruntfile, add a section named `extract_media` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `match_media` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  extract_media: {
+  match_media: {
     options: {
       // Task-specific options go here.
     },
@@ -56,7 +56,7 @@ In this example, the styles from `styles.css` then `other-styles.css` are evalua
 
 ```js
 grunt.initConfig({
-  extract_media: {
+  match_media: {
     files: {
       'desktop-styles.css': ['styles.css', 'other-styles.css'],
     },
@@ -69,7 +69,7 @@ In this example, the styles from `styles.css` then `other-styles.css` are evalua
 
 ```js
 grunt.initConfig({
-  extract_media: {
+  match_media: {
     options: {
       width: '20em',
       px_em_ratio: 16

@@ -22,7 +22,7 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.extract_media = {
+exports.match_media = {
   setUp: function(done) {
     // setup here if necessary
     done();

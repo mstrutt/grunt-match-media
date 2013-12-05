@@ -1,8 +1,8 @@
 {
-  "name": "grunt-extract-media",
+  "name": "grunt-match-media",
   "description": "Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them",
   "version": "0.0.2",
-  "homepage": "https://github.com/mstrutt/grunt-extract-media",
+  "homepage": "https://github.com/mstrutt/grunt-match-media",
   "author": {
     "name": "Michael Strutt",
     "email": "michael@mstrutt.co.uk",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mstrutt/grunt-extract-media.git"
+    "url": "git://github.com/mstrutt/grunt-match-media.git"
   },
   "bugs": {
-    "url": "https://github.com/mstrutt/grunt-extract-media/issues"
+    "url": "https://github.com/mstrutt/grunt-match-media/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/mstrutt/grunt-extract-media/blob/master/LICENSE-MIT"
+      "url": "https://github.com/mstrutt/grunt-match-media/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",

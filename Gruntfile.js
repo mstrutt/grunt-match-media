@@ -1,6 +1,6 @@
 /*
- * grunt-extract-media
- * https://github.com/mstrutt/grunt-extract-media
+ * grunt-match-media
+ * https://github.com/mstrutt/grunt-match-media
  *
  * Copyright (c) 2013 Michael Strutt
  * Licensed under the MIT license.
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    extract_media: {
+    match_media: {
       default_options: {
         options: {
         },
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'extract_media', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'match_media', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test', 'watch']);

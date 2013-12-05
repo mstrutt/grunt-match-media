@@ -1,6 +1,6 @@
 /*
- * grunt-extract-media
- * https://github.com/mstrutt/grunt-extract-media
+ * grunt-match-media
+ * https://github.com/mstrutt/grunt-match-media
  *
  * Copyright (c) 2013 Michael Strutt
  * Licensed under the MIT license.
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 	// Please see the Grunt documentation for more information regarding task
 	// creation: http://gruntjs.com/creating-tasks
 
-	grunt.registerMultiTask('extract_media', 'Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them', function() {
+	grunt.registerMultiTask('match_media', 'Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them', function() {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
 			width: '960px',
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 			// Real inner workings
 
 			function getUnit (value) {
-				return ((value.indexOf('px') > 0) ? 'px' : 'em' );
+				return ((value.indexOf('px') > -1) ? 'px' : 'em' );
 			}
 
 			function extractRules (mediaBlock) {
