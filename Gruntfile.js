@@ -39,8 +39,7 @@ module.exports = function(grunt) {
       },
       custom_options: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!',
+          width: '320px'
         },
         files: {
           'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
@@ -56,7 +55,7 @@ module.exports = function(grunt) {
     // Watcher
     watch: {
       tests: {
-        files: ['test/*_test.js', 'tasks/*.js'],
+        files: ['test/*_test.js', 'tasks/*.js', 'Gruntfile.js'],
         tasks: ['test']
       }
     }
