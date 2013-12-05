@@ -1,1 +1,15 @@
-1 2 3
+@media only screen and (max-width: 479px) {
+	.abv {
+		style: value;
+		style: value;
+	}
+
+	.xyz {
+		style: value;
+		style: value;
+	}
+}
+
+.some-other-thing {
+	this: that;
+}

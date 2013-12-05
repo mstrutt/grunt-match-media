@@ -1,1 +1,17 @@
-Testing: 1 2 3 !!!
+/* @media (min-width: 320px) { */
+	.something-one {
+		this: that;
+	}
+/* } */
+
+/* @media only screen and (max-width: 479px) { */
+	.abv {
+		style: value;
+		style: value;
+	}
+
+	.xyz {
+		style: value;
+		style: value;
+	}
+/* } */
