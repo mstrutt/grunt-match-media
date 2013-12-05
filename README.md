@@ -25,13 +25,15 @@ In your project's Gruntfile, add a section named `match_media` to the data objec
 ```js
 grunt.initConfig({
   match_media: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+    my_task: {
+      options: {
+        // Task-specific options go here.
+      }
+      your_target: {
+        // Target-specific file lists and/or options go here.
+      }
+    }
+  }
 });
 ```
 
@@ -57,10 +59,12 @@ In this example, the styles from `styles.css` then `other-styles.css` are evalua
 ```js
 grunt.initConfig({
   match_media: {
-    files: {
-      'desktop-styles.css': ['styles.css', 'other-styles.css'],
-    },
-  },
+    desktop: {
+      files: {
+        'desktop-styles.css': ['styles.css', 'other-styles.css']
+      }
+    }
+  }
 });
 ```
 
@@ -70,14 +74,16 @@ In this example, the styles from `styles.css` then `other-styles.css` are evalua
 ```js
 grunt.initConfig({
   match_media: {
-    options: {
-      width: '20em',
-      px_em_ratio: 16
-    },
-    files: {
-      'mobile-styles.css': ['styles.css', 'other-styles.css'],
-    },
-  },
+    desktop: {
+      options: {
+        width: '20em',
+        px_em_ratio: 16
+      },
+      files: {
+        'mobile-styles.css': ['styles.css', 'other-styles.css']
+      }
+    }
+  }
 });
 ```
 

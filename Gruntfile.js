@@ -34,16 +34,16 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
+          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+        }
       },
       custom_options: {
         options: {
           width: '20em'
         },
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
+          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+        }
       },
     },
 
