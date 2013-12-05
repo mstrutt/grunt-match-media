@@ -74,7 +74,7 @@ In this example, the styles from `styles.css` then `other-styles.css` are evalua
 ```js
 grunt.initConfig({
   match_media: {
-    desktop: {
+    mobile: {
       options: {
         width: '20em',
         px_em_ratio: 16
