@@ -53,6 +53,14 @@ module.exports = function(grunt) {
       tests: ['test/*_test.js'],
     },
 
+    // Watcher
+    watch: {
+      tests: {
+        files: ['test/*_test.js', 'tasks/*.js'],
+        tasks: ['test']
+      }
+    }
+
   });
 
   // Actually load this plugin's task(s).
@@ -62,12 +70,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
   grunt.registerTask('test', ['clean', 'extract_media', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'test', 'watch']);
 
 };
