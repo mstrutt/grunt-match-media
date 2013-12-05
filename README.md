@@ -41,7 +41,13 @@ grunt.initConfig({
 Type: `String`
 Default value: `'960px'`
 
-The viewport width for media queries to be evaluated against (for now use exclusively `em` or exclusively `px`).
+The viewport width for media queries to be evaluated against (in `em` or `px`).
+
+#### options.px_em_ratio
+Type: `Integer`
+Default value: `16`
+
+How many `px` to treat `1em` as (by default `1em` is treated as `16px`)
 
 ### Usage Examples
 
@@ -59,13 +65,14 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, the styles from `styles.css` then `other-styles.css` are evaluated and any media queries which would apply in a `320px` width browser are written into `mobile-syles.css`.
+In this example, the styles from `styles.css` then `other-styles.css` are evaluated and any media queries which would apply in a `20em` (or `20em * 16px = 320px`) width browser are written into `mobile-syles.css`.
 
 ```js
 grunt.initConfig({
   extract_media: {
     options: {
-      width: '320px'
+      width: '20em',
+      px_em_ratio: 16
     },
     files: {
       'mobile-styles.css': ['styles.css', 'other-styles.css'],
@@ -78,4 +85,6 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+* `0.0.2` Support for using `em` and `px` with a conversion between the two
+* `0.0.1` Basic functionality

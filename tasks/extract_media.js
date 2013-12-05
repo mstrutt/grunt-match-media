@@ -16,7 +16,8 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('extract_media', 'Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them', function() {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
-			width: '960px'
+			width: '960px',
+			px_em_ratio: 16
 		});
 
 		// Iterate over all specified file groups.
@@ -37,6 +38,10 @@ module.exports = function(grunt) {
 
 			// Real inner workings
 
+			function getUnit (value) {
+				return ((value.indexOf('px') > 0) ? 'px' : 'em' );
+			}
+
 			function extractRules (mediaBlock) {
 				// Commenting out the head and tail for the @media declaration
 				mediaBlock = mediaBlock.replace(/(@media[^{]*{)/gmi, "/* $1 */");
@@ -56,13 +61,23 @@ module.exports = function(grunt) {
 
 			function evalMedia (width, query) {
 				var conditions = extractConditions(query),
-					match = true;
+					match = true,
+					unit = getUnit(width);
 
 				width = parseInt(width, 10);
 
 				while (conditions.length && match) {
 					var cond = conditions.pop().replace(' ', '').split(':'),
+						mUnit = getUnit(cond[1]),
 						mWidth = parseInt(cond[1], 10);
+
+					if (unit !== mUnit) {
+						if (unit === 'em')
+							mWidth = options.px_em_ratio * mWidth;
+						if (mUnit === 'em')
+							mWidth = mWidth/options.px_em_ratio;
+					}
+
 					if (cond[0] === 'min-width')
 						match = (width >= mWidth);
 					else

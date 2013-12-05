@@ -39,7 +39,7 @@ module.exports = function(grunt) {
       },
       custom_options: {
         options: {
-          width: '320px'
+          width: '20em'
         },
         files: {
           'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
