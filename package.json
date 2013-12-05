@@ -1,7 +1,7 @@
 {
   "name": "grunt-extract-media",
   "description": "Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/mstrutt/grunt-extract-media",
   "author": {
     "name": "Michael Strutt",
