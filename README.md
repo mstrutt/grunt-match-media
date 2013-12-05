@@ -81,6 +81,14 @@ grunt.initConfig({
 });
 ```
 
+## Caveats / Todos
+
+At the moment, functionality is limited to `min-width` and `max-width` media queries, and it is assumed at all connecting statements are `and`. There is also no differentiation between screen and print or any other media types
+
+* Support for OR media queries
+* Checking for screen, print and other thing media types
+* Possibility to include more queries such as `min-device-pixel-ratio` or `min-height` and `max-height`;
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
