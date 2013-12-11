@@ -39,6 +39,12 @@
     "grunt": "~0.4.2"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "css",
+    "media query",
+    "media queries",
+    "viewport",
+    "mobile",
+    "desktop.css"
   ]
 }
