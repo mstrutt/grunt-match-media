@@ -1,5 +1,7 @@
 # grunt-match-media
 
+[![NPM version](https://badge.fury.io/js/grunt-match-media.png)](http://badge.fury.io/js/grunt-match-media)
+
 > Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them
 
 ## Getting Started
