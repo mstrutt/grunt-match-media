@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 						match = match && checkCondition(cond, width, unit);
 					});
 
-					console.log(width+unit + ' is ' + match + ' at "' + condition.join(' and ') + '"');
+					// console.log(width+unit + ' is ' + match + ' at "' + condition.join(' and ') + '"');
 				}
 
 				return match;

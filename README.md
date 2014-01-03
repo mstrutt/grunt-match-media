@@ -91,10 +91,8 @@ grunt.initConfig({
 
 ## Caveats / Todos
 
-At the moment, functionality is limited to `min-width` and `max-width` media queries, and it is assumed at all connecting statements are `and`. There is also no differentiation between screen and print or any other media types
+At the moment, functionality is limited to `min-width` and `max-width` media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
 
-* Support for OR media queries
-* Checking for screen, print and other thing media types
 * Possibility to include more queries such as `min-device-pixel-ratio` or `min-height` and `max-height`;
 
 ## Contributing
@@ -102,6 +100,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* `0.0.4` Support for `and` and `,` in statements, as well as a binary check between `print` and all other media types
 * `0.0.3` Small bugfixes
 * `0.0.2` Support for using `em` and `px` with a conversion between the two
 * `0.0.1` Basic functionality
