@@ -17,6 +17,7 @@ module.exports = function(grunt) {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
 			width: '960px',
+			height: '768px',
 			px_em_ratio: 16
 		});
 
@@ -50,20 +51,25 @@ module.exports = function(grunt) {
 			}
 
 			function trimRule (rule) {
+				// Remove brackets if any are present				
 				if (rule.indexOf('(') > -1)
 					rule = rule.substring( rule.indexOf('(')+1, rule.lastIndexOf(')') );
 
+				// Trime off whitespace and return
 				return rule.trim();
 			}
 
 			function extractConditions (query) {
-				var conditions = query.substring(query.indexOf('@media')+6, query.indexOf('{')).split(',');
+				// Extracting @media query and splitting on ',' to allow for separate evaluation
+				var conditions = query.substring(query.indexOf('@media')+6, query.indexOf('{')).split(','),
+					i;
 
-				for (var i = 0; i < conditions.length; i++) {
+				for (i = 0; i < conditions.length; i++) {
 					var r = conditions[i];
 
 					conditions[i] = [];
 
+					// creating array off all 'and'ed rules to evaluate
 					while (r.indexOf('and') > -1) {
 						conditions[i].push( trimRule( r.substring(0, r.indexOf('and')) ) );
 
@@ -76,37 +82,63 @@ module.exports = function(grunt) {
 				return conditions;
 			}
 
-			function checkCondition (cond, width, unit) {
-				var mUnit, mWidth, result;
+			function checkCondition (cond) {
+				var width = parseInt(options.width, 10),
+					wUnit = getUnit(options.width),
+					height = parseInt(options.height, 10),
+					hUnit = getUnit(options.height),
+					mUnit, mVal, result;
 
 				cond = cond.replace(' ', '').split(':');
 
+				// if no pair in rule, pass if 'print' is not present
 				if (!cond[1])
 					return cond[0].indexOf('print') === -1;
 
 				mUnit = getUnit(cond[1]);
-				mWidth = parseInt(cond[1], 10);
+				mVal = parseInt(cond[1], 10);
 
-				if (unit !== mUnit) {
-					if (unit === 'em')
-						mWidth = options.px_em_ratio * mWidth;
+				// checking for unit match and converting if needed
+				if (wUnit !== mUnit) {
+					if (wUnit === 'em')
+						mVal = options.px_em_ratio * mVal;
 					if (mUnit === 'em')
-						mWidth = mWidth/options.px_em_ratio;
+						mVal = mVal/options.px_em_ratio;
 				}
 
-				if (cond[0] === 'min-width')
-					return (width >= mWidth);
-				else
-					return (width <= mWidth);
+				if (hUnit !== mUnit) {
+					if (hUnit === 'em')
+						mVal = options.px_em_ratio * mVal;
+					if (mUnit === 'em')
+						mVal = mVal/options.px_em_ratio;
+				}
+
+				switch (cond[0]) {
+					case 'min-width':
+					case 'min-device-width':
+						result = (width >= mVal);
+						break;
+					case 'max-width':
+					case 'max-device-width':
+						result = (width <= mVal);
+						break;
+					case 'min-height':
+					case 'min-device-height':
+						result = (height >= mVal);
+						break;
+					case 'max-height':
+					case 'max-device-height':
+						result = (height <= mVal);
+						break;
+				}
+
+				return result;
 			}
 
-			function evalMedia (width, query) {
+			function evalMedia (query) {
 				var conditions = extractConditions(query),
 					condition,
-					unit = getUnit(width),
 					match = false;
-
-				width = parseInt(width, 10);
 
 				while(conditions.length && !match) {
 					condition = conditions.pop();
@@ -114,7 +146,7 @@ module.exports = function(grunt) {
 					match = true;
 
 					condition.forEach(function(cond) {
-						match = match && checkCondition(cond, width, unit);
+						match = match && checkCondition(cond);
 					});
 
 					// console.log(width+unit + ' is ' + match + ' at "' + condition.join(' and ') + '"');
@@ -132,7 +164,7 @@ module.exports = function(grunt) {
 
 			if (mediaBlocks)
 				mediaBlocks.forEach(function (mediaBlock) {
-					if (evalMedia(options.width, mediaBlock))
+					if (evalMedia(mediaBlock))
 						newMedia.push(extractRules(mediaBlock));
 				});
 
