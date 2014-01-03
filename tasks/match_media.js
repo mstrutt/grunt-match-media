@@ -49,39 +49,75 @@ module.exports = function(grunt) {
 				return mediaBlock;
 			}
 
+			function trimRule (rule) {
+				if (rule.indexOf('(') > -1)
+					rule = rule.substring( rule.indexOf('(')+1, rule.lastIndexOf(')') );
+
+				return rule.trim();
+			}
+
 			function extractConditions (query) {
-				var conditions = [];
-				while (query.indexOf('(') > -1) {
-					var start = query.lastIndexOf('(');
-					conditions.push( query.substring( start+1, query.lastIndexOf(')') ) );
-					query = query.substring(0, start);
+				var conditions = query.substring(query.indexOf('@media')+6, query.indexOf('{')).split(',');
+
+				for (var i = 0; i < conditions.length; i++) {
+					var r = conditions[i];
+
+					conditions[i] = [];
+
+					while (r.indexOf('and') > -1) {
+						conditions[i].push( trimRule( r.substring(0, r.indexOf('and')) ) );
+
+						r = r.substring(r.indexOf('and')+3);
+					}
+
+					conditions[i].push(trimRule(r));
 				}
+					
 				return conditions;
+			}
+
+			function checkCondition (cond, width, unit) {
+				var mUnit, mWidth, result;
+
+				cond = cond.replace(' ', '').split(':');
+
+				if (!cond[1])
+					return cond[0].indexOf('print') === -1;
+
+				mUnit = getUnit(cond[1]);
+				mWidth = parseInt(cond[1], 10);
+
+				if (unit !== mUnit) {
+					if (unit === 'em')
+						mWidth = options.px_em_ratio * mWidth;
+					if (mUnit === 'em')
+						mWidth = mWidth/options.px_em_ratio;
+				}
+
+				if (cond[0] === 'min-width')
+					return (width >= mWidth);
+				else
+					return (width <= mWidth);
 			}
 
 			function evalMedia (width, query) {
 				var conditions = extractConditions(query),
-					match = true,
-					unit = getUnit(width);
+					condition,
+					unit = getUnit(width),
+					match = false;
 
 				width = parseInt(width, 10);
 
-				while (conditions.length && match) {
-					var cond = conditions.pop().replace(' ', '').split(':'),
-						mUnit = getUnit(cond[1]),
-						mWidth = parseInt(cond[1], 10);
+				while(conditions.length && !match) {
+					condition = conditions.pop();
+					
+					match = true;
 
-					if (unit !== mUnit) {
-						if (unit === 'em')
-							mWidth = options.px_em_ratio * mWidth;
-						if (mUnit === 'em')
-							mWidth = mWidth/options.px_em_ratio;
-					}
+					condition.forEach(function(cond) {
+						match = match && checkCondition(cond, width, unit);
+					});
 
-					if (cond[0] === 'min-width')
-						match = (width >= mWidth);
-					else
-						match = (width <= mWidth);
+					console.log(width+unit + ' is ' + match + ' at "' + condition.join(' and ') + '"');
 				}
 
 				return match;

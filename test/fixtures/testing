@@ -10,7 +10,7 @@
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px), (min-width: 767px) {
 	.something-three {
 		this: that;
 	}
