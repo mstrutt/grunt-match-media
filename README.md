@@ -100,7 +100,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* `0.0.5` Support for device sized media queries to map to the appropriate min/max width, extended to support height-based media queries
+* `0.0.5` Support for `device` sized media queries to map to the appropriate `min`/`max` `width`, extended to support `height`-based media queries
 * `0.0.4` Support for `and` and `,` in statements, as well as a binary check between `print` and all other media types
 * `0.0.3` Small bugfixes
 * `0.0.2` Support for using `em` and `px` with a conversion between the two
