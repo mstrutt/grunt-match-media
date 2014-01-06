@@ -103,9 +103,9 @@ module.exports = function(grunt) {
 
 				cond = cond.replace(' ', '').split(':');
 
-				// if no pair in rule, pass if 'print' is not present
+				// if no pair in rule, pass if 'print' is not present or 'print' is 'not'ed
 				if (!cond[1])
-					return cond[0].indexOf('print') === -1;
+					return !(cond[0].indexOf('print') > -1 && cond[0].indexOf('not') === -1);
 
 				mUnit = getUnit(cond[1]);
 				mVal = parseInt(cond[1], 10);
