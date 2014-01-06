@@ -91,15 +91,16 @@ grunt.initConfig({
 
 ## Caveats / Todos
 
-At the moment, functionality is limited to `min-width` and `max-width` media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
+At the moment, functionality is limited to [`min-width`, `max-width`, `min-device-width`, `max-device-width`, `min-height`, `max-height`, `min-device-height`, `max-device-height`] media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
 
-* Possibility to include more queries such as `min-device-pixel-ratio` or `min-height` and `max-height`;
+* Possibility to include more queries such as `min-device-pixel-ratio` hopefully working through this list: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries#Pseudo-BNF_(for_those_of_you_that_like_that_kind_of_thing)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+* `0.0.5` Support for device sized media queries to map to the appropriate min/max width, extended to support height-based media queries
 * `0.0.4` Support for `and` and `,` in statements, as well as a binary check between `print` and all other media types
 * `0.0.3` Small bugfixes
 * `0.0.2` Support for using `em` and `px` with a conversion between the two
