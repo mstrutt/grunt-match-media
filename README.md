@@ -47,6 +47,12 @@ Default value: `'960px'`
 
 The viewport width for media queries to be evaluated against (in `em` or `px`).
 
+#### options.height
+Type: `String`
+Default value: `'768px'`
+
+The viewport height for media queries to be evaluated against (in `em` or `px`).
+
 #### options.px_em_ratio
 Type: `Integer`
 Default value: `16`
@@ -94,6 +100,7 @@ grunt.initConfig({
 At the moment, functionality is limited to [`min-width`, `max-width`, `min-device-width`, `max-device-width`, `min-height`, `max-height`, `min-device-height`, `max-device-height`] media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
 
 * Possibility to include more queries such as `min-device-pixel-ratio` hopefully working through this list: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries#Pseudo-BNF_(for_those_of_you_that_like_that_kind_of_thing)
+* An exclude option to ignore a certain type of media query
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
