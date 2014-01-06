@@ -22,3 +22,9 @@
 		color: black;
 	}
 }
+
+@media (min-device-height: 1000px) {
+	.some-other-thing {
+		this: that;
+	}	
+}

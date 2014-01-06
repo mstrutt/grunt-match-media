@@ -43,6 +43,18 @@ module.exports = function(grunt) {
 				return ((value.indexOf('px') > -1) ? 'px' : 'em' );
 			}
 
+			// checking for unit match and converting if needed
+			function convertUnit (xUnit, mUnit, mVal) {
+				if (xUnit !== mUnit) {
+					if (mUnit === 'em')
+						mVal = options.px_em_ratio * mVal;
+					if (xUnit === 'em')
+						mVal = mVal/options.px_em_ratio;
+				}
+
+				return mVal;
+			}
+
 			function extractRules (mediaBlock) {
 				// Commenting out the head and tail for the @media declaration
 				mediaBlock = mediaBlock.replace(/(@media[^{]*{)/gmi, "/* $1 */");
@@ -98,36 +110,25 @@ module.exports = function(grunt) {
 				mUnit = getUnit(cond[1]);
 				mVal = parseInt(cond[1], 10);
 
-				// checking for unit match and converting if needed
-				if (wUnit !== mUnit) {
-					if (wUnit === 'em')
-						mVal = options.px_em_ratio * mVal;
-					if (mUnit === 'em')
-						mVal = mVal/options.px_em_ratio;
-				}
-
-				if (hUnit !== mUnit) {
-					if (hUnit === 'em')
-						mVal = options.px_em_ratio * mVal;
-					if (mUnit === 'em')
-						mVal = mVal/options.px_em_ratio;
-				}
-
 				switch (cond[0]) {
 					case 'min-width':
 					case 'min-device-width':
+						mVal = convertUnit(wUnit, mUnit, mVal);
 						result = (width >= mVal);
 						break;
 					case 'max-width':
 					case 'max-device-width':
+						mVal = convertUnit(wUnit, mUnit, mVal);
 						result = (width <= mVal);
 						break;
 					case 'min-height':
 					case 'min-device-height':
+						mVal = convertUnit(hUnit, mUnit, mVal);
 						result = (height >= mVal);
 						break;
 					case 'max-height':
 					case 'max-device-height':
+						mVal = convertUnit(hUnit, mUnit, mVal);
 						result = (height <= mVal);
 						break;
 				}
