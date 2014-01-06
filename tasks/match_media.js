@@ -141,11 +141,14 @@ module.exports = function(grunt) {
 					condition,
 					match = false;
 
-				while(conditions.length && !match) {
+				// For ',' will pass as soon as one matches
+				while (conditions.length && !match) {
 					condition = conditions.pop();
 					
+					// resetting the match flag
 					match = true;
 
+					// for 'and' will pass only if all conditions do (true && true = true, true && false = false, false && true = false)
 					condition.forEach(function(cond) {
 						match = match && checkCondition(cond);
 					});
