@@ -112,3 +112,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * `0.0.3` Small bugfixes
 * `0.0.2` Support for using `em` and `px` with a conversion between the two
 * `0.0.1` Basic functionality
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mstrutt/grunt-match-media/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
