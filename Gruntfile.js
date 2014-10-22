@@ -46,6 +46,16 @@ module.exports = function(grunt) {
           'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
         }
       },
+      nocomment_option: {
+        options: {
+          width: '20em',
+          height: '1200px',
+          nocomment: true
+        },
+        files: {
+          'tmp/nocomment_option': ['test/fixtures/testing', 'test/fixtures/123']
+        }
+      }
     },
 
     // Unit tests.
