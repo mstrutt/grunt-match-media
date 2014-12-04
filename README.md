@@ -59,6 +59,12 @@ Default value: `16`
 
 How many `px` to treat `1em` as (by default `1em` is treated as `16px`)
 
+#### options.with_queries
+Type: `Boolean`
+Default value: `false`
+
+Preserves the media statements in the output CSS (default option is to write the styles without the query). This new option is useful for creating stylesheets for specific device ranges (but still have media queries within them).
+
 ### Usage Examples
 
 #### Default Options
@@ -107,6 +113,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* `0.0.6` New `with_queries` option added (thanks to [lukaszzdanikowski](https://github.com/lukaszzdanikowski) for working on this)
 * `0.0.5` Support for `device` sized media queries to map to the appropriate `min`/`max` `width`, extended to support `height`-based media queries
 * `0.0.4` Support for `and` and `,` in statements, as well as a binary check between `print` and all other media types
 * `0.0.3` Small bugfixes

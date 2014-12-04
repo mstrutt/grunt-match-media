@@ -56,8 +56,8 @@ module.exports = function(grunt) {
 			}
 
 			function extractRules (mediaBlock) {
-				// Commenting out the head and tail for the @media declaration only if nocomment is falsy
-				if (!options.nocomment) {
+				// Commenting out the head and tail for the @media declaration only if with_queries is falsy
+				if (!options.with_queries) {
 					mediaBlock = mediaBlock.replace(/(@media[^{]*{)/gmi, "/* $1 */");
 					mediaBlock = mediaBlock.substring(0, mediaBlock.lastIndexOf('}')) + "/* } */";
 				}
