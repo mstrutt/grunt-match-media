@@ -56,14 +56,16 @@ module.exports = function(grunt) {
 			}
 
 			function extractRules (mediaBlock) {
-				// Commenting out the head and tail for the @media declaration
-				mediaBlock = mediaBlock.replace(/(@media[^{]*{)/gmi, "/* $1 */");
-				mediaBlock = mediaBlock.substring(0, mediaBlock.lastIndexOf('}')) + "/* } */";
+				// Commenting out the head and tail for the @media declaration only if nocomment is falsy
+				if (!options.nocomment) {
+					mediaBlock = mediaBlock.replace(/(@media[^{]*{)/gmi, "/* $1 */");
+					mediaBlock = mediaBlock.substring(0, mediaBlock.lastIndexOf('}')) + "/* } */";
+				}
 				return mediaBlock;
 			}
 
 			function trimRule (rule) {
-				// Remove brackets if any are present				
+				// Remove brackets if any are present
 				if (rule.indexOf('(') > -1)
 					rule = rule.substring( rule.indexOf('(')+1, rule.lastIndexOf(')') );
 

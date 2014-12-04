@@ -47,4 +47,14 @@ exports.match_media = {
 
     test.done();
   },
+  nocomment_option: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/nocomment_option');
+    var expected = grunt.file.read('test/expected/nocomment_option');
+
+    test.equal(actual, expected, 'should remove unmatching queries but mached queries should not be commented out.');
+
+    test.done();
+  }
 };
