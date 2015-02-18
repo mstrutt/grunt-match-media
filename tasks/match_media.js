@@ -133,6 +133,9 @@ module.exports = function(grunt) {
 						mVal = convertUnit(hUnit, mUnit, mVal);
 						result = (height <= mVal);
 						break;
+					case 'orientation':
+						result = true;
+						break;
 				}
 
 				return result;
