@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 					conditions[i] = [];
 
 					// creating array off all 'and'ed rules to evaluate
-					while (r.indexOf('and') > -1) {
+					while (r.match(/\band\b/)) {
 						conditions[i].push( trimRule( r.substring(0, r.indexOf('and')) ) );
 
 						r = r.substring(r.indexOf('and')+3);
