@@ -55,6 +55,30 @@ module.exports = function(grunt) {
 				files: {
 					'tmp/with_queries_option': ['test/fixtures/testing', 'test/fixtures/123']
 				}
+			},
+			portrait_orientation: {
+				options: {
+					orientation: 'portrait'
+				},
+				files: {
+					'tmp/portrait_orientation': ['test/fixtures/testing', 'test/fixtures/123']
+				}
+			},
+			landscape_orientation: {
+				options: {
+					orientation: 'landscape'
+				},
+				files: {
+					'tmp/landscape_orientation': ['test/fixtures/testing', 'test/fixtures/123']
+				}
+			},
+			any_orientation: {
+				options: {
+					orientation: 'both'
+				},
+				files: {
+					'tmp/any_orientation': ['test/fixtures/testing', 'test/fixtures/123']
+				}
 			}
 		},
 

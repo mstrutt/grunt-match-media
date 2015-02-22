@@ -56,5 +56,35 @@ exports.match_media = {
 		test.equal(actual, expected, 'should remove unmatching queries but mached queries should not be commented out.');
 
 		test.done();
+	},
+	portrait_orientation: function(test) {
+		test.expect(1);
+
+		var actual = grunt.file.read('tmp/portrait_orientation');
+		var expected = grunt.file.read('test/expected/portrait_orientation');
+
+		test.equal(actual, expected, 'should match portrait queries');
+
+		test.done();
+	},
+	landscape_orientation: function(test) {
+		test.expect(1);
+
+		var actual = grunt.file.read('tmp/landscape_orientation');
+		var expected = grunt.file.read('test/expected/landscape_orientation');
+
+		test.equal(actual, expected, 'should match landscape queries');
+
+		test.done();
+	},
+	any_orientation: function(test) {
+		test.expect(1);
+
+		var actual = grunt.file.read('tmp/any_orientation');
+		var expected = grunt.file.read('test/expected/any_orientation');
+
+		test.equal(actual, expected, 'should match any queries');
+
+		test.done();
 	}
 };
