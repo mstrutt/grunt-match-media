@@ -13,3 +13,21 @@
 .some-other-thing {
 	this: that;
 }
+
+@media (orientation: landscape), (oriantation: portrait) {
+	.both-orientation {
+		display: block;
+	}
+}
+
+@media (orientation: landscape) {
+	.landscape {
+		display: block;
+	}
+}
+
+@media (oriantation: portrait) {
+	.portrait {
+		display: block
+	}
+}
