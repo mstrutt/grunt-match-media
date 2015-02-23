@@ -59,7 +59,7 @@ Default value: `16`
 
 How many `px` to treat `1em` as (by default `1em` is treated as `16px`)
 
-#### options.px_em_ratio
+#### options.orientation
 Type: `String`
 Default value: `undefined`
 
@@ -72,7 +72,7 @@ Default value: `false`
 Preserves the media statements in the output CSS (default option is to write the styles without the query). This new option is useful for creating stylesheets for specific device ranges (but still have media queries within them).
 
 #### options.always_match
-Type: `Array or String`
+Type: `Array of Strings`
 Default value: `[]`
 
 In case any options you require aren't covered by the task yet, you can pass a list of query types in to always match, whatever their value. Eg: `['min-device-pixel-ratio']`
