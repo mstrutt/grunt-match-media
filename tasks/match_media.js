@@ -55,6 +55,21 @@ module.exports = function(grunt) {
 				return mVal;
 			}
 
+			function needsUnits (condition) {
+				var conditionsThatNeedUnits = [
+					'min-width',
+					'min-device-width',
+					'max-width',
+					'max-device-width',
+					'min-height',
+					'min-device-height',
+					'max-height',
+					'max-device-height'
+				];
+
+				return conditionsThatNeedUnits.indexOf(condition) >= 0;
+			}
+
 			function extractRules (mediaBlock) {
 				// Commenting out the head and tail for the @media declaration only if with_queries is falsy
 				if (!options.with_queries) {
@@ -97,11 +112,7 @@ module.exports = function(grunt) {
 			}
 
 			function checkCondition (cond) {
-				var width = parseInt(options.width, 10),
-					wUnit = getUnit(options.width),
-					height = parseInt(options.height, 10),
-					hUnit = getUnit(options.height),
-					mUnit, mVal, result;
+				var width, wUnit, height, hUnit, mUnit, mVal, result;
 
 				cond = cond.replace(' ', '').split(':');
 
@@ -109,8 +120,15 @@ module.exports = function(grunt) {
 				if (!cond[1])
 					return !(cond[0].indexOf('print') > -1 && cond[0].indexOf('not') === -1);
 
-				mUnit = getUnit(cond[1]);
-				mVal = parseInt(cond[1], 10);
+				// Only generate all the numbers and units for queries that need them
+				if (needsUnits(cond[0])) {
+					width = parseInt(options.width, 10),
+					wUnit = getUnit(options.width),
+					height = parseInt(options.height, 10),
+					hUnit = getUnit(options.height),
+					mUnit = getUnit(cond[1]);
+					mVal = parseInt(cond[1], 10);
+				}
 
 				switch (cond[0]) {
 					case 'min-width':
