@@ -18,7 +18,8 @@ module.exports = function(grunt) {
 		var options = this.options({
 			width: '960px',
 			height: '768px',
-			px_em_ratio: 16
+			px_em_ratio: 16,
+			always_match: []
 		});
 
 		// Iterate over all specified file groups.
@@ -55,6 +56,21 @@ module.exports = function(grunt) {
 				return mVal;
 			}
 
+			function needsUnits (condition) {
+				var conditionsThatNeedUnits = [
+					'min-width',
+					'min-device-width',
+					'max-width',
+					'max-device-width',
+					'min-height',
+					'min-device-height',
+					'max-height',
+					'max-device-height'
+				];
+
+				return conditionsThatNeedUnits.indexOf(condition) >= 0;
+			}
+
 			function extractRules (mediaBlock) {
 				// Commenting out the head and tail for the @media declaration only if with_queries is falsy
 				if (!options.with_queries) {
@@ -84,7 +100,7 @@ module.exports = function(grunt) {
 					conditions[i] = [];
 
 					// creating array off all 'and'ed rules to evaluate
-					while (r.indexOf('and') > -1) {
+					while (r.match(/\band\b/)) {
 						conditions[i].push( trimRule( r.substring(0, r.indexOf('and')) ) );
 
 						r = r.substring(r.indexOf('and')+3);
@@ -97,20 +113,27 @@ module.exports = function(grunt) {
 			}
 
 			function checkCondition (cond) {
-				var width = parseInt(options.width, 10),
-					wUnit = getUnit(options.width),
-					height = parseInt(options.height, 10),
-					hUnit = getUnit(options.height),
-					mUnit, mVal, result;
+				var width, wUnit, height, hUnit, mUnit, mVal, result;
 
 				cond = cond.replace(' ', '').split(':');
+
+				// Return true if always match is specified
+				if (options.always_match.indexOf(cond[0]) > -1)
+					return true;
 
 				// if no pair in rule, pass if 'print' is not present or 'print' is 'not'ed
 				if (!cond[1])
 					return !(cond[0].indexOf('print') > -1 && cond[0].indexOf('not') === -1);
 
-				mUnit = getUnit(cond[1]);
-				mVal = parseInt(cond[1], 10);
+				// Only generate all the numbers and units for queries that need them
+				if (needsUnits(cond[0])) {
+					width = parseInt(options.width, 10),
+					wUnit = getUnit(options.width),
+					height = parseInt(options.height, 10),
+					hUnit = getUnit(options.height),
+					mUnit = getUnit(cond[1]);
+					mVal = parseInt(cond[1], 10);
+				}
 
 				switch (cond[0]) {
 					case 'min-width':
@@ -134,9 +157,14 @@ module.exports = function(grunt) {
 						result = (height <= mVal);
 						break;
 					case 'orientation':
-						result = true;
+						if (options.orientation)
+							result = (options.orientation === 'both' || options.orientation === cond[1]);
+						else
+							result = false;
 						break;
 				}
+
+				// console.log(cond, result);
 
 				return result;
 			}

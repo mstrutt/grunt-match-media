@@ -30,7 +30,7 @@ grunt.initConfig({
     my_task: {
       options: {
         // Task-specific options go here.
-      }
+      },
       your_target: {
         // Target-specific file lists and/or options go here.
       }
@@ -59,11 +59,23 @@ Default value: `16`
 
 How many `px` to treat `1em` as (by default `1em` is treated as `16px`)
 
+#### options.px_em_ratio
+Type: `String`
+Default value: `undefined`
+
+What orientation queries to match, options are `'landscape'`, `'portrait'`, or `'both'`
+
 #### options.with_queries
 Type: `Boolean`
 Default value: `false`
 
 Preserves the media statements in the output CSS (default option is to write the styles without the query). This new option is useful for creating stylesheets for specific device ranges (but still have media queries within them).
+
+#### options.always_match
+Type: `Array or String`
+Default value: `[]`
+
+In case any options you require aren't covered by the task yet, you can pass a list of query types in to always match, whatever their value. Eg: `['min-device-pixel-ratio']`
 
 ### Usage Examples
 
@@ -91,7 +103,12 @@ grunt.initConfig({
     mobile: {
       options: {
         width: '20em',
-        px_em_ratio: 16
+        px_em_ratio: 16,
+        orientation: 'portrait',
+        always_match: [
+          'min-device-pixel-ratio'
+        ],
+        with_queries: true
       },
       files: {
         'mobile-styles.css': ['styles.css', 'other-styles.css']
@@ -103,7 +120,7 @@ grunt.initConfig({
 
 ## Caveats / Todos
 
-At the moment, functionality is limited to [`min-width`, `max-width`, `min-device-width`, `max-device-width`, `min-height`, `max-height`, `min-device-height`, `max-device-height`] media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
+At the moment, functionality is limited to [`min-width`, `max-width`, `min-device-width`, `max-device-width`, `min-height`, `max-height`, `min-device-height`, `max-device-height`, `orientation`] media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
 
 * Possibility to include more queries such as `min-device-pixel-ratio` hopefully working through this list: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries#Pseudo-BNF_(for_those_of_you_that_like_that_kind_of_thing)
 * An exclude option to ignore a certain type of media query
@@ -113,6 +130,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* `0.0.7` Supporting `orientation``queries (thanks for the nudge [zeorin](https://github.com/zeorin)), and an option to always match certain queries
 * `0.0.6` New `with_queries` option added (thanks to [lukaszzdanikowski](https://github.com/lukaszzdanikowski) for working on this)
 * `0.0.5` Support for `device` sized media queries to map to the appropriate `min`/`max` `width`, extended to support `height`-based media queries
 * `0.0.4` Support for `and` and `,` in statements, as well as a binary check between `print` and all other media types
