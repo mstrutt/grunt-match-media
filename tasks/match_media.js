@@ -134,9 +134,14 @@ module.exports = function(grunt) {
 						result = (height <= mVal);
 						break;
 					case 'orientation':
-						result = true;
+						if (options.orientation)
+							result = (options.orientation === 'both' || options.orientation === cond[1]);
+						else
+							result = false;
 						break;
 				}
+
+				// console.log(cond, result);
 
 				return result;
 			}
