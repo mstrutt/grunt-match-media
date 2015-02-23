@@ -18,7 +18,8 @@ module.exports = function(grunt) {
 		var options = this.options({
 			width: '960px',
 			height: '768px',
-			px_em_ratio: 16
+			px_em_ratio: 16,
+			always_match: []
 		});
 
 		// Iterate over all specified file groups.
@@ -115,6 +116,10 @@ module.exports = function(grunt) {
 				var width, wUnit, height, hUnit, mUnit, mVal, result;
 
 				cond = cond.replace(' ', '').split(':');
+
+				// Return true if always match is specified
+				if (options.always_match.indexOf(cond[0]) > -1)
+					return true;
 
 				// if no pair in rule, pass if 'print' is not present or 'print' is 'not'ed
 				if (!cond[1])
