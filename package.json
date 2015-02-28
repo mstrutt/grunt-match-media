@@ -1,7 +1,7 @@
 {
 	"name": "grunt-match-media",
 	"description": "Grunt plugin to extract styles matching certain viewport width conditions, and create separate stylesheets with them",
-	"version": "0.0.7-2",
+	"version": "0.1.0",
 	"homepage": "https://github.com/mstrutt/grunt-match-media",
 	"author": {
 		"name": "Michael Strutt",
