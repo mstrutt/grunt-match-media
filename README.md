@@ -2,10 +2,10 @@
 
 [![NPM version](https://img.shields.io/npm/v/grunt-match-media.svg)](https://www.npmjs.com/package/grunt-match-media) [![NPM Downloads](https://img.shields.io/npm/dm/grunt-match-media.svg)](https://www.npmjs.com/package/grunt-match-media) [![Dependencies](https://img.shields.io/david/mstrutt/grunt-match-media.svg)](https://david-dm.org/mstrutt/grunt-match-media#info=dependencies) [![Dev Dependencies](https://img.shields.io/david/dev/mstrutt/grunt-match-media.svg)](https://david-dm.org/mstrutt/grunt-match-media#info=devDependencies) [![Build Status](https://img.shields.io/travis/mstrutt/grunt-match-media/master.svg)](https://travis-ci.org/mstrutt/grunt-match-media)
 
-> Grunt plugin to extract styles matching certain media conditions, and create separate stylesheets with them
+> Grunt wrapper for [node-match-media](https://www.npmjs.com/package/node-match-media) - plugin to extract styles matching certain media conditions, and create separate stylesheets with them
 
 ## Getting Started
-This plugin requires Grunt `~0.4.2`
+This plugin requires Grunt `~0.4.5`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -118,18 +118,14 @@ grunt.initConfig({
 });
 ```
 
-## Caveats / Todos
-
-At the moment, functionality is limited to [`min-width`, `max-width`, `min-device-width`, `max-device-width`, `min-height`, `max-height`, `min-device-height`, `max-device-height`, `orientation`] media queries, chaining is supported with `,` and `and` to build complex statements. I have also recently added support for a binary check between `print` and all other media types. In the future I am looking to include:
-
-* Possibility to include more queries such as `min-device-pixel-ratio` hopefully working through this list: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries#Pseudo-BNF_(for_those_of_you_that_like_that_kind_of_thing)
-* An exclude option to ignore a certain type of media query
-
 ## Contributing
+All of the functionality is now contained in the [node-match-media project](https://github.com/mstrutt/node-match-media) so any contributions may be more appropriate there.
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+* `0.1.0` Abstracting main functionality into [node-match-media project](https://github.com/mstrutt/node-match-media)
 * `0.0.7` Supporting `orientation``queries (thanks for the nudge [zeorin](https://github.com/zeorin)), and an option to always match certain queries
 * `0.0.6` New `with_queries` option added (thanks to [lukaszzdanikowski](https://github.com/lukaszzdanikowski) for working on this)
 * `0.0.5` Support for `device` sized media queries to map to the appropriate `min`/`max` `width`, extended to support `height`-based media queries
