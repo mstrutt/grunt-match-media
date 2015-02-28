@@ -1,8 +1,8 @@
 # grunt-match-media
 
-[![NPM version](https://badge.fury.io/js/grunt-match-media.png)](http://badge.fury.io/js/grunt-match-media) [![Build Status](https://travis-ci.org/mstrutt/grunt-match-media.png?branch=master)](https://travis-ci.org/mstrutt/grunt-match-media)
+[![NPM version](https://img.shields.io/npm/v/grunt-match-media.svg)](https://www.npmjs.com/package/grunt-match-media) [![NPM Downloads](https://img.shields.io/npm/dm/grunt-match-media.svg)](https://www.npmjs.com/package/grunt-match-media) [![Dependencies](https://img.shields.io/david/mstrutt/grunt-match-media.svg)](https://david-dm.org/mstrutt/grunt-match-media#info=dependencies) [![Dev Dependencies](https://img.shields.io/david/dev/mstrutt/grunt-match-media.svg)](https://david-dm.org/mstrutt/grunt-match-media#info=devDependencies) [![Build Status](https://img.shields.io/travis/mstrutt/grunt-match-media/master.svg)](https://travis-ci.org/mstrutt/grunt-match-media)
 
-> Grunt plugin to extract styles matching certain width conditions, and create separate stylesheets with them
+> Grunt plugin to extract styles matching certain media conditions, and create separate stylesheets with them
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -137,5 +137,3 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * `0.0.3` Small bugfixes
 * `0.0.2` Support for using `em` and `px` with a conversion between the two
 * `0.0.1` Basic functionality
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mstrutt/grunt-match-media/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
