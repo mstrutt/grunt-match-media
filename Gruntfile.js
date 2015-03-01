@@ -2,100 +2,63 @@
  * grunt-match-media
  * https://github.com/mstrutt/grunt-match-media
  *
- * Copyright (c) 2013 Michael Strutt
+ * Copyright (c) 2014 Michael Strutt
  * Licensed under the MIT license.
  */
 
 'use strict';
 
 module.exports = function(grunt) {
+	var test_path = require.resolve('match-media-tests'),
+		test_spec;
+
+	test_path = test_path.substring(0, test_path.lastIndexOf('/'));
+
+	test_spec = require(test_path + '/spec.js');
+
+	test_spec.fixtures = test_spec.fixtures.map(function(fixture_path) {
+		return test_path + '/' + fixture_path;
+	});
 
 	// Project configuration.
-	grunt.initConfig({
+	var config = {
 		jshint: {
 			all: [
 				'Gruntfile.js',
-				'tasks/*.js',
-				'<%= nodeunit.tests %>',
+				'tasks/*.js'
 			],
 			options: {
 				jshintrc: '.jshintrc',
-			},
+			}
 		},
 
 		// Before generating any new files, remove any previously-created files.
 		clean: {
-			tests: ['tmp'],
+			tests: [test_path + '/output'],
+		},
+
+		execute: {
+			test: {
+				src: [test_path + '/test.js']
+			}
 		},
 
 		// Configuration to be run (and then tested).
-		match_media: {
-			default_options: {
-				options: {
-				},
-				files: {
-					'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			},
-			custom_options: {
-				options: {
-					width: '20em',
-					height: '1200px'
-				},
-				files: {
-					'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			},
-			with_queries_option: {
-				options: {
-					width: '20em',
-					height: '1200px',
-					with_queries: true
-				},
-				files: {
-					'tmp/with_queries_option': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			},
-			portrait_orientation: {
-				options: {
-					orientation: 'portrait'
-				},
-				files: {
-					'tmp/portrait_orientation': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			},
-			landscape_orientation: {
-				options: {
-					orientation: 'landscape'
-				},
-				files: {
-					'tmp/landscape_orientation': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			},
-			any_orientation: {
-				options: {
-					orientation: 'both'
-				},
-				files: {
-					'tmp/any_orientation': ['test/fixtures/testing', 'test/fixtures/123']
-				}
-			}
-		},
+		match_media: {}
+	};
 
-		// Unit tests.
-		nodeunit: {
-			tests: ['test/*_test.js'],
-		},
+	Object.keys(test_spec.options).forEach(function(key) {
+		var files = {};
 
-		// Watcher
-		watch: {
-			tests: {
-				files: ['test/*_test.js', 'tasks/*.js', 'Gruntfile.js'],
-				tasks: ['test']
-			}
-		}
+		files[test_path + '/output/' + key + '.css'] = test_spec.fixtures;
 
+		config.match_media[key] = {
+			options: test_spec.options[key],
+			files: files
+		};
 	});
+
+	grunt.initConfig(config);
 
 	// Actually load this plugin's task(s).
 	grunt.loadTasks('tasks');
@@ -103,14 +66,10 @@ module.exports = function(grunt) {
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-nodeunit');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-execute');
 
-	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
-	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'match_media', 'nodeunit']);
+	grunt.registerTask('test', ['jshint', 'match_media', 'execute:test']);
 
-	// By default, lint and run all tests.
-	grunt.registerTask('default', ['jshint', 'test', 'watch']);
+	grunt.registerTask('default', ['test']);
 
 };

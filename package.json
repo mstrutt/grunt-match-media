@@ -1,53 +1,55 @@
 {
-	"name": "grunt-match-media",
-	"description": "Grunt plugin to extract styles matching certain viewport width conditions, and create separate stylesheets with them",
-	"version": "0.1.0",
-	"homepage": "https://github.com/mstrutt/grunt-match-media",
-	"author": {
-		"name": "Michael Strutt",
-		"email": "michael@mstrutt.co.uk",
-		"url": "http://mstrutt.co.uk"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/mstrutt/grunt-match-media.git"
-	},
-	"bugs": {
-		"url": "https://github.com/mstrutt/grunt-match-media/issues"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "https://github.com/mstrutt/grunt-match-media/blob/master/LICENSE-MIT"
-		}
-	],
-	"main": "Gruntfile.js",
-	"engines": {
-		"node": ">= 0.8.0"
-	},
-	"scripts": {
-		"test": "grunt test"
-	},
-	"dependencies": {
-		"node-match-media": "0.0.2"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-contrib-clean": "^0.6.0",
-		"grunt-contrib-jshint": "^0.11.0",
-		"grunt-contrib-nodeunit": "^0.4.1",
-		"grunt-contrib-watch": "^0.6.1"
-	},
-	"peerDependencies": {
-		"grunt": "~0.4.2"
-	},
-	"keywords": [
-		"gruntplugin",
-		"css",
-		"media query",
-		"media queries",
-		"viewport",
-		"mobile",
-		"desktop.css"
-	]
+  "name": "grunt-match-media",
+  "description": "Grunt plugin to extract styles matching certain viewport width conditions, and create separate stylesheets with them",
+  "version": "0.1.1",
+  "homepage": "https://github.com/mstrutt/grunt-match-media",
+  "author": {
+    "name": "Michael Strutt",
+    "email": "michael@mstrutt.co.uk",
+    "url": "http://mstrutt.co.uk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mstrutt/grunt-match-media.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mstrutt/grunt-match-media/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mstrutt/grunt-match-media/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "tasks/match_media.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "pretest": "grunt clean",
+    "test": "grunt test",
+    "posttest": "grunt clean"
+  },
+  "dependencies": {
+    "node-match-media": "0.0.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-execute": "^0.2.2",
+    "match-media-tests": "mstrutt/match-media-tests"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin",
+    "css",
+    "media query",
+    "media queries",
+    "viewport",
+    "mobile",
+    "desktop.css"
+  ]
 }

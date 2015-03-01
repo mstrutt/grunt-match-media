@@ -2,7 +2,7 @@
  * grunt-match-media
  * https://github.com/mstrutt/grunt-match-media
  *
- * Copyright (c) 2013 Michael Strutt
+ * Copyright (c) 2014 Michael Strutt
  * Licensed under the MIT license.
  */
 
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 				return grunt.file.read(filepath);
 			}).join("\n");
 
-			output = matchMedia.run(css)
+			output = matchMedia.run(css);
 
 			// Write the destination file.
 			grunt.file.write(file.dest, output);
